@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.Share_Sense.bill_splitting.entities.User;
+import com.Share_Sense.bill_splitting.globalException.BusinessException;
 import com.Share_Sense.bill_splitting.repository.UserRepository;
 
 @Service
@@ -22,10 +23,13 @@ public class UserService {
 		return userrepo.findAll();
 	}
 
-	public ResponseEntity<User> getUserById(Long id) {
+	public User getUserById(Long id) {
+		if (id < 1) {
+			throw new BusinessException("enter +ve value");
+		}
 		Optional<User> userOptional = userrepo.findById(id);
-		User user = userOptional.orElse(null);
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		User user = userOptional.get();
+		return user;
 	}
 
 	public ResponseEntity<User> createUser(User newUser) {

@@ -31,21 +31,21 @@ public class UserController {
 
 	@GetMapping("/userby/{id}")
 	public ResponseEntity<User> UserById(@PathVariable Long id) {
-		ResponseEntity<User> userOptional = userservice.getUserById(id);
+		User userOptional = userservice.getUserById(id);
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(userOptional, HttpStatus.OK);
 	}
 
 	@PostMapping("/create/users")
 	public ResponseEntity<User> User(@RequestBody User newUser) {
 
-//		newUser.setCreatedAt(LocalDateTime.now());
-//		newUser.setUpdatedAt(LocalDateTime.now());
-//		newUser.setActive(true);
-//		newUser.setDeleted(false);
+		newUser.setCreatedAt(LocalDateTime.now());
+		newUser.setUpdatedAt(LocalDateTime.now());
+		newUser.setActive(true);
+		newUser.setDeleted(false);
 		return userservice.createUser(newUser);
-//		User savedUser = userservice.createUser(newUser)
-//		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+		User savedUser = userservice.createUser(newUser)
+	return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/deleteby/{id}")

@@ -22,4 +22,5 @@ public class SettlementService {
 	public Optional<Settlement> getSettlementById(Long id) {
 		return settlementRepository.findById(id);
 	}
+
 }

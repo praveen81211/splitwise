@@ -13,7 +13,7 @@ import com.Share_Sense.bill_splitting.entities.ExpenseParticipant;
 import com.Share_Sense.bill_splitting.service.Expenseparticipant_service;
 
 @RestController
-@RequestMapping("/expense-participants")
+@RequestMapping("/expense_participants")
 public class ExpenseParticipantController {
 
 	@Autowired

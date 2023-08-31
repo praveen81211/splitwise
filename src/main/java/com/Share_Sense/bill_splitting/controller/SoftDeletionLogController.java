@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Share_Sense.bill_splitting.entities.SoftDeletionLog;
-import com.Share_Sense.bill_splitting.repository.SoftDeletionLogRepository;
+import com.Share_Sense.bill_splitting.service.Softdeletionlogservice;
 
 @RestController
 @RequestMapping("/soft-deletion-logs")
 public class SoftDeletionLogController {
 
 	@Autowired
-	private SoftDeletionLogRepository softDeletionLogRepo;
+	private Softdeletionlogservice softdeletionlogservice;
 
 	@GetMapping
-	public List<SoftDeletionLog> getAllSoftDeletionLogs() {
-		return softDeletionLogRepo.findAll();
+	public List<SoftDeletionLog> AllSoftDeletionLogs() {
+		return softdeletionlogservice.getAllSoftDeletionLogs();
 	}
 
 }
