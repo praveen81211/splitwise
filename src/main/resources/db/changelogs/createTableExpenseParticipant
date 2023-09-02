@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-expense-participant-table" author="praveen">
+        <createTable tableName="ExpenseParticipant">
+            <column name="expense_participant_id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="expense_id" type="INT">
+                <constraints references="Expense(expense_id)"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints references="User(user_id)"/>
+            </column>
+            <column name="share_amount" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

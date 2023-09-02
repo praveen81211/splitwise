@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,7 +25,7 @@ public class Expenseservice {
 		return expenserepo.findById(id);
 	}
 
-	public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
+	public Expense createExpense(@RequestBody Expense expense) {
 		// Set necessary fields before saving
 		LocalDateTime now = LocalDateTime.now(); // Current timestamp
 
@@ -36,6 +34,6 @@ public class Expenseservice {
 		expense.setDeleted(false); // Assuming the default value for isDeleted is false
 
 		Expense savedExpense = expenserepo.save(expense);
-		return new ResponseEntity<>(savedExpense, HttpStatus.CREATED);
+		return savedExpense;
 	}
 }

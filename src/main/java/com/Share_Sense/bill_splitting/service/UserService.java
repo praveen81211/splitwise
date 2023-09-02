@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.Share_Sense.bill_splitting.entities.User;
@@ -32,7 +30,7 @@ public class UserService {
 		return user;
 	}
 
-	public ResponseEntity<User> createUser(User newUser) {
+	public User createUser(User newUser) {
 
 		newUser.setCreatedAt(LocalDateTime.now());
 		newUser.setUpdatedAt(LocalDateTime.now());
@@ -40,16 +38,13 @@ public class UserService {
 		newUser.setDeleted(false);
 
 		User savedUser = userrepo.save(newUser);
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+		return savedUser;
 	}
 
-	public ResponseEntity<Void> deleteUser(Long id) {
-		if (userrepo.existsById(id)) {
-			userrepo.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+	public boolean deleteUser(Long id) {
+		userrepo.deleteById(id);
+		return false;
+
 	}
 
 }

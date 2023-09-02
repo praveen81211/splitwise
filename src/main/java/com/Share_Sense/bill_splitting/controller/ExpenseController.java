@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +29,26 @@ public class ExpenseController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<Expense> ExpenseById(@PathVariable Long id) {
-		return expenseservice.getExpenseById(id);
+	public ResponseEntity<Expense> getExpenseById(@PathVariable Long id) {
+		Optional<Expense> expenseOptional = expenseservice.getExpenseById(id);
+
+		if (expenseOptional.isPresent()) {
+			Expense expense = expenseOptional.get();
+			return ResponseEntity.ok(expense);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	@PostMapping
 	public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
-		return expenseservice.createExpense(expense);
+		Expense createdExpense = expenseservice.createExpense(expense);
+
+		if (createdExpense != null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 }
