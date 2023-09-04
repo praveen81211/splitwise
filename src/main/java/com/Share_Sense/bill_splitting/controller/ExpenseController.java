@@ -62,10 +62,6 @@ public class ExpenseController {
 		Optional<Expense> expenseOptional = expenseservice.getExpenseById(id);
 
 		if (expenseOptional.isPresent()) {
-			// Update the properties of the existing expense with the provided data
-			// Example: Expense existingExpense = expenseOptional.get();
-			// existingExpense.setName(updatedExpense.getName());
-			// Update other properties as needed
 
 			Expense savedExpense = expenseservice.updateExpense(updatedExpense);
 			return ResponseEntity.ok(savedExpense);

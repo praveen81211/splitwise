@@ -58,8 +58,6 @@ public class UserGroupController {
 
 		if (existingUserGroupOptional.isPresent()) {
 			UserGroup existingUserGroup = existingUserGroupOptional.get();
-			// Update the properties of the existing user group with the provided data
-			// Example: existingUserGroup.setJoinedAt(updatedUserGroup.getJoinedAt());
 
 			UserGroup savedUserGroup = userGroupService.updateUserGroup(existingUserGroup);
 			return ResponseEntity.ok(savedUserGroup);

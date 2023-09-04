@@ -67,12 +67,6 @@ public class ExpenseParticipantController {
 				.getExpenseParticipantById(id);
 
 		if (expenseParticipantOptional.isPresent()) {
-			// Update the properties of the existing expense participant with the provided
-			// data
-			// Example: ExpenseParticipant existingExpenseParticipant =
-			// expenseParticipantOptional.get();
-			// existingExpenseParticipant.setShareAmount(updatedExpenseParticipant.getShareAmount());
-			// Update other properties as needed
 
 			ExpenseParticipant savedExpenseParticipant = expenseParticipantService
 					.updateExpenseParticipant(updatedExpenseParticipant);

@@ -59,7 +59,6 @@ public class GroupController {
 		if (existingGroup != null) {
 
 			existingGroup.setGroupName(updatedGroup.getGroupName());
-			// Update other properties as needed
 
 			Group savedGroup = groupService.updateGroup(existingGroup);
 			return new ResponseEntity<>(savedGroup, HttpStatus.OK);

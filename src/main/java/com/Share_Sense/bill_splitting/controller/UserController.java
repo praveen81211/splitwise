@@ -51,7 +51,6 @@ public class UserController {
 	public ResponseEntity<User> createUser(@RequestBody Users_dto userDto) {
 		User user = mapUserDtoToUser(userDto);
 
-		// Call the service method to create the user
 		User savedUser = userService.createUser(user);
 
 		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
