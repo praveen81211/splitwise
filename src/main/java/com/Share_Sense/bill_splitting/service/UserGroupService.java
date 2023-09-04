@@ -3,9 +3,11 @@ package com.Share_Sense.bill_splitting.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Share_Sense.bill_splitting.dto.UserGroup_dto;
 import com.Share_Sense.bill_splitting.entities.UserGroup;
 import com.Share_Sense.bill_splitting.repository.UserGroupRepository;
 
@@ -14,10 +16,13 @@ public class UserGroupService {
 
 	@Autowired
 	private UserGroupRepository userGroupRepository;
+	@Autowired
+	private ModelMapper modelmapper;
 
 	// Create a new user group
-	public UserGroup createUserGroup(UserGroup userGroup) {
-		return userGroupRepository.save(userGroup);
+	public UserGroup createUserGroup(UserGroup_dto usergroup) {
+		UserGroup user = modelmapper.map(usergroup, UserGroup.class);
+		return user;
 	}
 
 	// Get user group by ID

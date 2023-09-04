@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Share_Sense.bill_splitting.dto.Expense_dto;
 import com.Share_Sense.bill_splitting.entities.Expense;
 import com.Share_Sense.bill_splitting.service.ExpenseService;
 
@@ -46,14 +46,10 @@ public class ExpenseController {
 
 	// Create a new expense
 	@PostMapping
-	public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
-		Expense createdExpense = expenseservice.createExpense(expense);
+	public Expense createExpense(@RequestBody Expense_dto exp) {
+		Expense ex = expenseservice.createExpense(exp);
+		return ex;
 
-		if (createdExpense != null) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(createdExpense);
-		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
 	}
 
 	// Update an existing expense by ID

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Share_Sense.bill_splitting.dto.UserGroup_dto;
 import com.Share_Sense.bill_splitting.entities.UserGroup;
 import com.Share_Sense.bill_splitting.service.UserGroupService;
 
@@ -46,9 +46,9 @@ public class UserGroupController {
 
 	// Create a new user group
 	@PostMapping("/create")
-	public ResponseEntity<UserGroup> createUserGroup(@RequestBody UserGroup newUserGroup) {
-		UserGroup savedUserGroup = userGroupService.createUserGroup(newUserGroup);
-		return new ResponseEntity<>(savedUserGroup, HttpStatus.CREATED);
+	public UserGroup createUserGroup(@RequestBody UserGroup_dto usergroup) {
+		UserGroup savedUserGroup = userGroupService.createUserGroup(usergroup);
+		return savedUserGroup;
 	}
 
 	// Update an existing user group by ID
