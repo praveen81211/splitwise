@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class Users_dto {
 
-	private Long userId;
+	private Long UserId;
 
-	private String username;
+	private String Username;
 
 	private String email;
 
@@ -21,19 +21,19 @@ public class Users_dto {
 	private boolean isDeleted;
 
 	public Long getUserId() {
-		return userId;
+		return UserId;
 	}
 
 	public void setUserId(Long userId) {
-		this.userId = userId;
+		UserId = userId;
 	}
 
 	public String getUsername() {
-		return username;
+		return Username;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		Username = username;
 	}
 
 	public String getEmail() {
@@ -83,4 +83,5 @@ public class Users_dto {
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+
 }

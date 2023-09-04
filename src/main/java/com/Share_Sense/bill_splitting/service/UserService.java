@@ -17,10 +17,12 @@ public class UserService {
 	@Autowired
 	UserRepository userrepo;
 
+	// get all users
 	public List<User> getAllUsers() {
 		return userrepo.findAll();
 	}
 
+	// get users by id
 	public User getUserById(Long id) {
 		if (id < 1) {
 			throw new BusinessException("enter +ve value");
@@ -30,6 +32,7 @@ public class UserService {
 		return user;
 	}
 
+	// create users
 	public User createUser(User newUser) {
 
 		newUser.setCreatedAt(LocalDateTime.now());
@@ -41,6 +44,7 @@ public class UserService {
 		return savedUser;
 	}
 
+//	delete users by id
 	public boolean deleteUser(Long id) {
 		userrepo.deleteById(id);
 		return false;

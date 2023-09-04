@@ -42,11 +42,18 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+		
+		  <dependency>
+        <groupId>org.modelmapper</groupId>
+        <artifactId>modelmapper</artifactId>
+        <version>3.1.1</version> <!-- Replace with the desired version -->
+          </dependency>
+          
+	<!--	<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-		<!-- Use the latest version available -->
-		</dependency>
+		 Use the latest version available 
+		</dependency> -->
 
 
 	</dependencies>
