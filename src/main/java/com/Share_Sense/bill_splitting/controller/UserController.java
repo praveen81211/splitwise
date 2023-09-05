@@ -48,27 +48,24 @@ public class UserController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<User> createUser(@RequestBody Users_dto userDto) {
-		User user = mapUserDtoToUser(userDto);
-
-		User savedUser = userService.createUser(user);
-
-		return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-	}
-
-	// Map Users_dto to User entity
-	private User mapUserDtoToUser(Users_dto userDto) {
-		User user = new User();
-		user.setUsername(userDto.getUsername());
-		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
-		user.setCreatedAt(userDto.getCreatedAt());
-		user.setUpdatedAt(userDto.getUpdatedAt());
-		user.setActive(userDto.isActive());
-		user.setDeleted(userDto.isDeleted());
-
+	public User createUser(@RequestBody Users_dto userDto) {
+		User user = userService.createUser(userDto);
 		return user;
 	}
+//  we can create the modelMapping by creating object for the users
+//	 Map Users_dto to User entity 
+//	private User mapUserDtoToUser(Users_dto userDto) {
+//		User user = new User();
+//		user.setUsername(userDto.getUsername());
+//		user.setEmail(userDto.getEmail());
+//		user.setPassword(userDto.getPassword());
+//		user.setCreatedAt(userDto.getCreatedAt());
+//		user.setUpdatedAt(userDto.getUpdatedAt());
+//		user.setActive(userDto.isActive());
+//		user.setDeleted(userDto.isDeleted());
+//
+//		return user;
+//	}
 
 	// Delete user by ID
 	@DeleteMapping("/delete/{id}")

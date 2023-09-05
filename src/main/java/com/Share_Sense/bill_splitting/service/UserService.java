@@ -1,12 +1,13 @@
 package com.Share_Sense.bill_splitting.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Share_Sense.bill_splitting.dto.Users_dto;
 import com.Share_Sense.bill_splitting.entities.User;
 import com.Share_Sense.bill_splitting.globalException.BusinessException;
 import com.Share_Sense.bill_splitting.repository.UserRepository;
@@ -16,6 +17,9 @@ public class UserService {
 
 	@Autowired
 	UserRepository userrepo;
+
+	@Autowired
+	private ModelMapper modelmapper;
 
 	// get all users
 	public List<User> getAllUsers() {
@@ -33,15 +37,11 @@ public class UserService {
 	}
 
 	// create users
-	public User createUser(User newUser) {
+	public User createUser(Users_dto user1) {
 
-		newUser.setCreatedAt(LocalDateTime.now());
-		newUser.setUpdatedAt(LocalDateTime.now());
-		newUser.setActive(true);
-		newUser.setDeleted(false);
+		User user = modelmapper.map(user1, User.class);
 
-		User savedUser = userrepo.save(newUser);
-		return savedUser;
+		return user;
 	}
 
 	// delete users by id
