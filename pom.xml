@@ -49,11 +49,12 @@
         <version>3.1.1</version> <!-- Replace with the desired version -->
           </dependency>
           
-	<!--	<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-		 Use the latest version available 
-		</dependency> -->
+	<dependency>
+    <groupId>org.liquibase</groupId>
+    <artifactId>liquibase-core</artifactId>
+    <version>4.20.0</version> <!-- Use the version appropriate for your project -->
+    </dependency>
+
 
 
 	</dependencies>
