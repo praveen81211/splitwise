@@ -8,19 +8,15 @@ public class ApiResponse<T> {
 	private ApiErrorResponse error;
 
 	public ApiResponse() {
-
 	}
 
 	public ApiResponse(T data, Map<String, Object> meta) {
-
 		this.data = data;
 		this.meta = meta;
-
 	}
 
 	public ApiResponse(ApiErrorResponse error) {
 		this.error = error;
-
 	}
 
 	public T getData() {
@@ -46,5 +42,4 @@ public class ApiResponse<T> {
 	public void setError(ApiErrorResponse error) {
 		this.error = error;
 	}
-
 }

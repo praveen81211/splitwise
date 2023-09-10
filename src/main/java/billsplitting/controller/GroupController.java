@@ -3,7 +3,6 @@ package billsplitting.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import billsplitting.dto.GroupDTO;
-import billsplitting.entities.Group;
+import billsplitting.responsedto.ApiResponse;
 import billsplitting.service.GroupService;
 
 @RestController
@@ -25,54 +25,44 @@ public class GroupController {
 	@Autowired
 	private GroupService groupService;
 
-	// Get all groups
+	// @ Get all groups
 	@GetMapping("/all")
-	public List<Group> getAllGroups() {
-		return groupService.getAllGroups();
+	public ResponseEntity<ApiResponse<List<GroupDTO>>> getAllGroups() {
+		List<GroupDTO> group = groupService.getAllGroups();
+		return ResponseEntity.ok(new ApiResponse<>(group, null));
 	}
 
-	// Get group by ID
+	// @Get group by ID
 	@GetMapping("/{id}")
-	public ResponseEntity<Group> getGroupById(@PathVariable Long id) {
-		Group group = groupService.getGroupById(id).orElse(null);
+	public ResponseEntity<ApiResponse<GroupDTO>> getGroupById(@PathVariable Long id) {
+		GroupDTO group = groupService.getGroupById(id);
+		return ResponseEntity.ok(new ApiResponse<>(group, null));
 
-		if (group != null) {
-			return ResponseEntity.ok(group);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
 	}
 
-	// Create a new group
+	// @Create a new group
 	@PostMapping("/create")
-	public ResponseEntity<Group> createGroup(@RequestBody GroupDTO newGroupDto) {
-		Group createdGroup = groupService.createGroup(newGroupDto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(createdGroup);
+	public ResponseEntity<ApiResponse<GroupDTO>> newgroup(@RequestBody GroupDTO groupDTO) {
+		GroupDTO groupDto = groupService.createGroup(groupDTO);
+		return ResponseEntity.ok(new ApiResponse<>(groupDto, null));
 	}
 
-	// Update an existing group by ID
+	// @ Update an existing group by ID
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Group> updateGroup(@PathVariable Long id, @RequestBody Group updatedGroup) {
-		Group existingGroup = groupService.getGroupById(id).orElse(null);
-
-		if (existingGroup != null) {
-			existingGroup.setGroupName(updatedGroup.getGroupName());
-			Group savedGroup = groupService.updateGroup(existingGroup);
-			return ResponseEntity.ok(savedGroup);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<ApiResponse<GroupDTO>> updateDepartment(@PathVariable Long id,
+			@RequestBody GroupDTO updatedDepartment) {
+		GroupDTO updatinggroup = groupService.updategroup(id, updatedDepartment);
+		return ResponseEntity.ok(new ApiResponse<>(updatinggroup, null));
 	}
 
-	// Delete group by ID
+	// @Delete group by ID
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Void> deleteGroup(@PathVariable Long id) {
-		Group deleted = groupService.deleteGroup(id);
-
-		if (deleted != null) {
+	public ResponseEntity<String> deleteDepartmentById(@PathVariable Long id) {
+		try {
+			groupService.deletegroup(id);
 			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
+		} catch (ResponseStatusException e) {
+			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
 	}
 }

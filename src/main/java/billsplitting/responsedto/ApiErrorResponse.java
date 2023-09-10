@@ -8,13 +8,11 @@ public class ApiErrorResponse {
 	private Map<String, Object> details;
 
 	public ApiErrorResponse() {
-
 	}
 
 	public ApiErrorResponse(int code, String message) {
 		this.code = code;
 		this.message = message;
-
 	}
 
 	public int getCode() {
@@ -40,5 +38,4 @@ public class ApiErrorResponse {
 	public void setDetails(Map<String, Object> details) {
 		this.details = details;
 	}
-
 }

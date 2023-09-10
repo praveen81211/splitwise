@@ -3,13 +3,16 @@ package billsplitting.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,7 +30,7 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<UserDTO>>> Getall() {
 
-		List<UserDTO> userDTO = userService.getAllusers();
+		List<UserDTO> userDTO = userService.getAllUsers();
 		return ResponseEntity.ok(new ApiResponse<>(userDTO, null));
 	}
 
@@ -55,4 +58,25 @@ public class UserController {
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
 	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<ApiResponse<UserDTO>> updateuser(@PathVariable Long id, @RequestBody UserDTO updateduser) {
+		UserDTO dto = userService.updateduser(id, updateduser);
+		return ResponseEntity.ok(new ApiResponse<>(dto, null));
+	}
+
+	@PostMapping("/register")
+	public ResponseEntity<ApiResponse<UserDTO>> registerUser(@RequestBody UserDTO registrationRequest) {
+		UserDTO userdto = userService.registerUser(registrationRequest);
+		return ResponseEntity.ok(new ApiResponse<>(userdto, null));
+	}
+
+	@GetMapping("/all")
+	public ResponseEntity<ApiResponse<Page<UserDTO>>> getAllUsersWithPagination(
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
+		Page<UserDTO> userPage = userService.getAllUsersWithPagination(page, size, sortBy);
+		return ResponseEntity.ok(new ApiResponse<>(userPage, null));
+	}
+
 }
