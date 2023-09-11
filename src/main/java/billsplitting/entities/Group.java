@@ -17,9 +17,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "[Group]")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Group {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,75 +57,9 @@ public class Group {
 	@JsonIgnore
 	private List<UserGroup> userGroups = new ArrayList<>();
 
-	public Long getGroupId() {
-		return groupId;
-	}
+	public void setGroupName(String groupName2) {
+		// TODO Auto-generated method stub
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-
-	public User getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(User createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public List<Expense> getExpenses() {
-		return expenses;
-	}
-
-	public void setExpenses(List<Expense> expenses) {
-		this.expenses = expenses;
-	}
-
-	public List<UserGroup> getUserGroups() {
-		return userGroups;
-	}
-
-	public void setUserGroups(List<UserGroup> userGroups) {
-		this.userGroups = userGroups;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [groupId=" + groupId + ", groupName=" + groupName + ", createdByUser=" + createdByUser
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", isDeleted=" + isDeleted + ", expenses="
-				+ expenses + ", userGroups=" + userGroups + "]";
 	}
 
 }

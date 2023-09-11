@@ -17,9 +17,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Expense")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Expense {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,84 +60,4 @@ public class Expense {
 	@OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<ExpenseParticipant> participants = new ArrayList<>();
-
-	public Long getExpenseId() {
-		return expenseId;
-	}
-
-	public void setExpenseId(Long expenseId) {
-		this.expenseId = expenseId;
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public User getPayerUser() {
-		return payerUser;
-	}
-
-	public void setPayerUser(User payerUser) {
-		this.payerUser = payerUser;
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public List<ExpenseParticipant> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(List<ExpenseParticipant> participants) {
-		this.participants = participants;
-	}
-
-	@Override
-	public String toString() {
-		return "Expense [expenseId=" + expenseId + ", amount=" + amount + ", description=" + description
-				+ ", payerUser=" + payerUser + ", group=" + group + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + ", isDeleted=" + isDeleted + ", participants=" + participants + "]";
-	}
-
 }

@@ -12,9 +12,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "softdeletionlog")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SoftDeletionLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,51 +40,5 @@ public class SoftDeletionLog {
 
 	@Column(name = "deleted_at")
 	private LocalDateTime deletedAt;
-
-	public Long getDeletionId() {
-		return deletionId;
-	}
-
-	public void setDeletionId(Long deletionId) {
-		this.deletionId = deletionId;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public Long getRecordId() {
-		return recordId;
-	}
-
-	public void setRecordId(Long recordId) {
-		this.recordId = recordId;
-	}
-
-	public User getDeletedByUser() {
-		return deletedByUser;
-	}
-
-	public void setDeletedByUser(User deletedByUser) {
-		this.deletedByUser = deletedByUser;
-	}
-
-	public LocalDateTime getDeletedAt() {
-		return deletedAt;
-	}
-
-	public void setDeletedAt(LocalDateTime deletedAt) {
-		this.deletedAt = deletedAt;
-	}
-
-	@Override
-	public String toString() {
-		return "SoftDeletionLog [deletionId=" + deletionId + ", tableName=" + tableName + ", recordId=" + recordId
-				+ ", deletedByUser=" + deletedByUser + ", deletedAt=" + deletedAt + "]";
-	}
 
 }

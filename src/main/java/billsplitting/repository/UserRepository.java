@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	List<User> findByUsername(String username);
 
+	@Override
 	Page<User> findAll(Pageable pageable);
 
 	Page<User> findAllByOrderByUsernameAsc(Pageable pageable); // Add this method for sorting by username ascending

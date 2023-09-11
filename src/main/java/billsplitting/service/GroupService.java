@@ -51,14 +51,18 @@ public class GroupService {
 		}
 	}
 
-	// @ Create a new group
-	public GroupDTO createGroup(GroupDTO creategroup) {
+	// Create a new group
+	public GroupDTO createGroup(String groupName) {
+		Group newGroup = new Group();
+		newGroup.setGroupName(groupName);
 
-		Group grp = modelmapper.map(creategroup, Group.class);
-		Group group = groupRepository.save(grp);
-		GroupDTO dto = modelmapper.map(group, GroupDTO.class);
+		// You can set other properties of the group if needed
 
-		return dto;
+		Group createdGroup = groupRepository.save(newGroup);
+		GroupDTO createdGroupDTO = modelmapper.map(createdGroup, GroupDTO.class);
+
+		return createdGroupDTO;
+
 	}
 
 	// @Update an existing group

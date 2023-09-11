@@ -3,6 +3,7 @@ package billsplitting.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,11 +41,13 @@ public class GroupController {
 
 	}
 
-	// @Create a new group
-	@PostMapping("/create")
+	// Create a new group
+	@PostMapping("/createnewgroup")
 	public ResponseEntity<ApiResponse<GroupDTO>> newgroup(@RequestBody GroupDTO groupDTO) {
-		GroupDTO groupDto = groupService.createGroup(groupDTO);
-		return ResponseEntity.ok(new ApiResponse<>(groupDto, null));
+
+		GroupDTO createdGroup = groupService.createGroup(groupDTO.getGroupName());
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(createdGroup, null));
 	}
 
 	// @ Update an existing group by ID

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Example</title>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <script>
+        const socket = new SockJS('/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, (frame) => {
+            console.log('Connected to WebSocket');
+
+            // Subscribe to the expense updates topic
+            stompClient.subscribe('/topic/expense-updates', (expense) => {
+                const expenseNotification = JSON.parse(expense.body);
+                console.log('Expense Notification:', expenseNotification);
+                // Handle the expense notification here
+            });
+        });
+    </script>
+</body>
+</html>

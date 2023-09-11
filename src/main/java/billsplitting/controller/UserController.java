@@ -22,7 +22,7 @@ import billsplitting.service.UserService;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserController<ExpenseNotification> {
 
 	@Autowired
 	private UserService userService;

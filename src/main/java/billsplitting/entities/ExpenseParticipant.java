@@ -10,9 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "expenseparticipant")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExpenseParticipant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,43 +37,5 @@ public class ExpenseParticipant {
 
 	@Column(name = "share_amount", nullable = false)
 	private Double shareAmount;
-
-	public Long getExpenseParticipantId() {
-		return expenseParticipantId;
-	}
-
-	public void setExpenseParticipantId(Long expenseParticipantId) {
-		this.expenseParticipantId = expenseParticipantId;
-	}
-
-	public Expense getExpense() {
-		return expense;
-	}
-
-	public void setExpense(Expense expense) {
-		this.expense = expense;
-	}
-
-	public User getUserparticipant() {
-		return userparticipant;
-	}
-
-	public void setUserparticipant(User userparticipant) {
-		this.userparticipant = userparticipant;
-	}
-
-	public Double getShareAmount() {
-		return shareAmount;
-	}
-
-	public void setShareAmount(Double shareAmount) {
-		this.shareAmount = shareAmount;
-	}
-
-	@Override
-	public String toString() {
-		return "ExpenseParticipant [expenseParticipantId=" + expenseParticipantId + ", expense=" + expense
-				+ ", userparticipant=" + userparticipant + ", shareAmount=" + shareAmount + "]";
-	}
 
 }
