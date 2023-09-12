@@ -50,21 +50,21 @@ public class UserService {
 
 	// @Get user by ID
 	public UserDTO getUserById(Long id) {
-		Optional<User> optionalUserDTO = userRepository.findById(id);
-		if (optionalUserDTO.isPresent()) {
-			User user = optionalUserDTO.get();
-			UserDTO DTO = modelMapper.map(user, UserDTO.class);
-			return DTO;
+		Optional<User> optionalUser = userRepository.findById(id);
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			UserDTO userDto = modelMapper.map(user, UserDTO.class);
+			return userDto;
 		} else {
-			throw new NoSuchElementException("department not found with id:" + id);
+			throw new NoSuchElementException("user not found with id:" + id);
 		}
 	}
 
 	// Create user
 	public UserDTO createusers(UserDTO createRequest) {
 		User user = modelMapper.map(createRequest, User.class);
-		User savedBankDetails = userRepository.save(user);
-		UserDTO savedDto = modelMapper.map(savedBankDetails, UserDTO.class);
+		User savedUser = userRepository.save(user);
+		UserDTO savedDto = modelMapper.map(savedUser, UserDTO.class);
 		return savedDto;
 	}
 

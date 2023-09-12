@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import billsplitting.dto.GroupDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -86,6 +87,11 @@ public class User {
 	public void setPassword(String encode) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public List<GroupDTO> getGroups() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

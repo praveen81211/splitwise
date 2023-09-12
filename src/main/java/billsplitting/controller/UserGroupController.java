@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import billsplitting.dto.AddUserToGroupDTO;
 import billsplitting.dto.UserGroupDTO;
 import billsplitting.entities.UserGroup;
 import billsplitting.service.UserGroupService;
@@ -76,5 +77,13 @@ public class UserGroupController {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+
+//	adding user to group
+
+	@PostMapping("/adduser")
+	public ResponseEntity<Void> addUserToGroup(@RequestBody AddUserToGroupDTO addUserToGroupDTO) {
+		userGroupService.addUserToGroup(addUserToGroupDTO);
+		return ResponseEntity.noContent().build();
 	}
 }

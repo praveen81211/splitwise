@@ -37,9 +37,9 @@ public class UserController<ExpenseNotification> {
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<UserDTO>> getUserById(@PathVariable Long id) {
 
-		UserDTO userDTO = userService.getUserById(id);
+		UserDTO userDto = userService.getUserById(id);
 
-		return ResponseEntity.ok(new ApiResponse<>(userDTO, null));
+		return ResponseEntity.ok(new ApiResponse<>(userDto, null));
 	}
 
 	@PostMapping("/create")

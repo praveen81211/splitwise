@@ -50,7 +50,7 @@ public class GroupController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(createdGroup, null));
 	}
 
-	// @ Update an existing group by ID
+//	 @ Update an existing group by ID  
 	@PutMapping("/update/{id}")
 	public ResponseEntity<ApiResponse<GroupDTO>> updateDepartment(@PathVariable Long id,
 			@RequestBody GroupDTO updatedDepartment) {

@@ -14,6 +14,7 @@ import billsplitting.customexception.ResourceNotFoundException;
 import billsplitting.dto.GroupDTO;
 import billsplitting.entities.Group;
 import billsplitting.repository.GroupRepository;
+//import billsplitting.repository.UserRepository;
 
 @Service
 public class GroupService {
@@ -23,6 +24,9 @@ public class GroupService {
 
 	@Autowired
 	private ModelMapper modelmapper;
+
+//	@Autowired
+//	private UserRepository userRepository;
 
 	// @Get all groups
 	public List<GroupDTO> getAllGroups() {
@@ -87,4 +91,5 @@ public class GroupService {
 		}
 		groupRepository.deleteById(id);
 	}
+
 }
