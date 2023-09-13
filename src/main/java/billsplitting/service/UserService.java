@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import billsplitting.entities.Group;
+import billsplitting.repository.GroupRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,10 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+
+
+	@Autowired
+	private GroupRepository groupRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -128,5 +134,19 @@ public class UserService {
 		Page<User> userPage = userRepository.findAll(pageable);
 		return userPage.map(user -> modelMapper.map(user, UserDTO.class));
 	}
+
+
+//	add users to group-------------------------------------------------------------------------------------------------------
+
+	public User addMemberToGroup(String name, Long groupId) {
+		Group group = groupRepository.findById(groupId)
+				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
+
+		User user = new User();
+		user.setName(name);
+		user.setGroup(group);
+		return userRepository.save(user);
+	}
+}
 
 }

@@ -77,4 +77,15 @@ public class ExpenseController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+
+	//	split bill----------------------------------------------------------------------
+	@PostMapping
+	public Expense splitBill(@RequestBody BillRequest billRequest) {
+		return expenseService.splitBill(
+				billRequest.getGroupId(),
+				billRequest.getPayerId(),
+				billRequest.getDescription(),
+				billRequest.getAmount()
+		);
+	}
 }

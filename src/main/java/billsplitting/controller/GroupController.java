@@ -41,7 +41,7 @@ public class GroupController {
 
 	}
 
-	// Create a new group
+	// Create a new group -----------------------------------------------------------------------------------------
 	@PostMapping("/createnewgroup")
 	public ResponseEntity<ApiResponse<GroupDTO>> newgroup(@RequestBody GroupDTO groupDTO) {
 

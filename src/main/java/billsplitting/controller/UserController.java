@@ -28,6 +28,7 @@ public class UserController<ExpenseNotification> {
 	private UserService userService;
 
 	@GetMapping
+	
 	public ResponseEntity<ApiResponse<List<UserDTO>>> Getall() {
 
 		List<UserDTO> userDTO = userService.getAllUsers();
@@ -78,5 +79,11 @@ public class UserController<ExpenseNotification> {
 		Page<UserDTO> userPage = userService.getAllUsersWithPagination(page, size, sortBy);
 		return ResponseEntity.ok(new ApiResponse<>(userPage, null));
 	}
+//       add user to group -----------------------------------------------------------------------------------------------
+	@PostMapping
+	public User addMemberToGroup(@RequestBody UserRequest memberRequest) {
+		return userService.addMemberToGroup(memberRequest.getName(), memberRequest.getGroupId());
+	}
+}
 
 }
