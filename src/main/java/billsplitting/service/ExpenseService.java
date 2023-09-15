@@ -62,36 +62,36 @@ public class ExpenseService {
 //	split bill ----------------------------------------------------------------------------------------------------------------------------------
 
 
-	public Expense splitBill(Long groupId, Long userId, String description, double amount) {
-		Group group = groupRepository.findById(groupId)
-				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
-
-		User payer = userRepository.findById(userId)
-				.orElseThrow(() -> new IllegalArgumentException("Payer not found"));
-
-		List<User> groupMembers = userRepository.findByGroupId(groupId);
-		int numMembers = groupMembers.size();
-		double individualShare = amount / numMembers;
-
-		Expense bill = new Expense();
-		bill.setGroup(group);
-		bill.setPayer(user);
-		bill.setDescription(description);
-		bill.setAmount(amount);
-		billRepository.save(bill);
-
-		for (user member : groupMembers) {
-			if (!member.equals(user)) {
-				Expense shareBill = new Expense();
-				shareBill.setGroup(group);
-				shareBill.setPayer(payer);
-				shareBill.setDescription(description);
-				shareBill.setAmount(individualShare);
-				ExpenseRepository.save(shareBill);
-			}
-		}
-
-		return bill;
-	}
+//	public Expense splitBill(Long groupId, Long userId, String description, double amount) {
+//		Group group = groupRepository.findById(groupId)
+//				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
+//
+//		User payer = userRepository.findById(userId)
+//				.orElseThrow(() -> new IllegalArgumentException("Payer not found"));
+//
+//		List<User> groupMembers = userRepository.findByGroupId(groupId);
+//		int numMembers = groupMembers.size();
+//		double individualShare = amount / numMembers;
+//
+//		Expense bill = new Expense();
+//		bill.setGroup(group);
+//		bill.setPayer(user);
+//		bill.setDescription(description);
+//		bill.setAmount(amount);
+//		billRepository.save(bill);
+//
+//		for (user member : groupMembers) {
+//			if (!member.equals(user)) {
+//				Expense shareBill = new Expense();
+//				shareBill.setGroup(group);
+//				shareBill.setPayer(payer);
+//				shareBill.setDescription(description);
+//				shareBill.setAmount(individualShare);
+//				ExpenseRepository.save(shareBill);
+//			}
+//		}
+//
+//		return bill;
+//	}
 }
-}
+

@@ -79,13 +79,13 @@ public class ExpenseController {
 	}
 
 	//	split bill----------------------------------------------------------------------
-	@PostMapping
-	public Expense splitBill(@RequestBody BillRequest billRequest) {
-		return expenseService.splitBill(
-				billRequest.getGroupId(),
-				billRequest.getPayerId(),
-				billRequest.getDescription(),
-				billRequest.getAmount()
-		);
-	}
+//	@PostMapping
+//	public Expense splitBill(@RequestBody BillRequest billRequest) {
+//		return expenseService.splitBill(
+//				billRequest.getGroupId(),
+//				billRequest.getPayerId(),
+//				billRequest.getDescription(),
+//				billRequest.getAmount()
+//		);
+//	}
 }

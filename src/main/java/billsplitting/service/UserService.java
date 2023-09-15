@@ -138,15 +138,15 @@ public class UserService {
 
 //	add users to group-------------------------------------------------------------------------------------------------------
 
-	public User addMemberToGroup(String name, Long groupId) {
-		Group group = groupRepository.findById(groupId)
-				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
-
-		User user = new User();
-		user.setName(name);
-		user.setGroup(group);
-		return userRepository.save(user);
-	}
+//	public User addMemberToGroup(String name, Long groupId) {
+//		Group group = groupRepository.findById(groupId)
+//				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
+//
+//		User user = new User();
+//		user.setName(name);
+//		user.setGroup(group);
+//		return userRepository.save(user);
+//	}
 }
 
-}
+

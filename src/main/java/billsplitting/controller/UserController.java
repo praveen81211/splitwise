@@ -80,10 +80,10 @@ public class UserController<ExpenseNotification> {
 		return ResponseEntity.ok(new ApiResponse<>(userPage, null));
 	}
 //       add user to group -----------------------------------------------------------------------------------------------
-	@PostMapping
-	public User addMemberToGroup(@RequestBody UserRequest memberRequest) {
-		return userService.addMemberToGroup(memberRequest.getName(), memberRequest.getGroupId());
-	}
+//	@PostMapping
+//	public User addMemberToGroup(@RequestBody UserRequest memberRequest) {
+//		return userService.addMemberToGroup(memberRequest.getName(), memberRequest.getGroupId());
+//	}
 }
 
-}
+
