@@ -1,5 +1,6 @@
 package billsplitting.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,4 +61,24 @@ public class Expense {
 	@OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<ExpenseParticipant> participants = new ArrayList<>();
+
+	public void setAmount(BigDecimal share) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setUser(User member) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setGroup(Group group2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setExpenseDate(LocalDateTime now) {
+		// TODO Auto-generated method stub
+
+	}
 }

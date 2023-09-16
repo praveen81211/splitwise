@@ -1,9 +1,11 @@
 package billsplitting.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,14 +80,12 @@ public class ExpenseController {
 		}
 	}
 
-	//	split bill----------------------------------------------------------------------
-//	@PostMapping
-//	public Expense splitBill(@RequestBody BillRequest billRequest) {
-//		return expenseService.splitBill(
-//				billRequest.getGroupId(),
-//				billRequest.getPayerId(),
-//				billRequest.getDescription(),
-//				billRequest.getAmount()
-//		);
-//	}
+	// Endpoint to apply expenses to group members
+	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}")
+	public ResponseEntity<String> applyExpenseToGroupMembers(@PathVariable Long groupId,
+			@PathVariable BigDecimal amount) {
+		expenseService.applyExpenseToGroupMembers(groupId, amount);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
+	}
+
 }

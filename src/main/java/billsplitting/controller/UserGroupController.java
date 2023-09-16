@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import billsplitting.dto.AddUserToGroupDTO;
 import billsplitting.dto.UserGroupDTO;
 import billsplitting.entities.UserGroup;
 import billsplitting.service.UserGroupService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usergroups")
@@ -79,11 +80,10 @@ public class UserGroupController {
 		}
 	}
 
-//	adding user to group
-
-	@PostMapping("/adduser")
-	public ResponseEntity<Void> addUserToGroup(@RequestBody AddUserToGroupDTO addUserToGroupDTO) {
-		userGroupService.addUserToGroup(addUserToGroupDTO);
-		return ResponseEntity.noContent().build();
+	// Endpoint to add a user to a group
+	@PostMapping("/addUserToGroup")
+	public ResponseEntity<UserGroupDTO> addUserToGroup(@Valid @RequestBody UserGroupDTO userGroupDTO) {
+		UserGroupDTO addedUserGroup = userGroupService.addUserToGroup(userGroupDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(addedUserGroup);
 	}
 }

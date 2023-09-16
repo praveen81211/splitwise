@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import billsplitting.customexception.ResourceNotFoundException;
-import billsplitting.dto.AddUserToGroupDTO;
 import billsplitting.dto.UserGroupDTO;
 import billsplitting.entities.Group;
 import billsplitting.entities.User;
@@ -63,10 +62,10 @@ public class UserGroupService {
 		return false;
 	}
 
-//	adding user to group 
-	public void addUserToGroup(AddUserToGroupDTO addUserToGroupDTO) {
-		Long groupId = addUserToGroupDTO.getGroupId();
-		Long userId = addUserToGroupDTO.getUserId();
+	// Add a user to a group
+	public UserGroupDTO addUserToGroup(UserGroupDTO userGroupDTO) {
+		Long groupId = userGroupDTO.getGroupId();
+		Long userId = userGroupDTO.getUserId();
 
 		// Check if the group and user exist
 		Group group = groupRepository.findById(groupId)
@@ -75,13 +74,17 @@ public class UserGroupService {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
-		// Create a UserGroup entity and set the group, user, and joinedAt time stamp
+		// Create a UserGroup entity and set the group, user, and joinedAt timestamp
 		UserGroup userGroup = new UserGroup();
 		userGroup.setGroup(group);
 		userGroup.setUser(user);
 		userGroup.setJoinedAt(LocalDateTime.now());
 
 		// Save the UserGroup entity
-		userGroupRepository.save(userGroup);
+		userGroup = userGroupRepository.save(userGroup);
+
+		// Convert UserGroup entity to UserGroupDTO using modelmapper
+		return modelMapper.map(userGroup, UserGroupDTO.class);
 	}
+
 }

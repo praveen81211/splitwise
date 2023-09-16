@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import billsplitting.entities.Group;
-import billsplitting.repository.GroupRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +20,7 @@ import billsplitting.customexception.RegistrationException;
 import billsplitting.customexception.ResourceNotFoundException;
 import billsplitting.dto.UserDTO;
 import billsplitting.entities.User;
+//import billsplitting.repository.GroupRepository;
 import billsplitting.repository.UserRepository;
 import jakarta.validation.Valid;
 
@@ -31,9 +30,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-
-	@Autowired
-	private GroupRepository groupRepository;
+//	@Autowired
+//	private GroupRepository groupRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -44,14 +42,14 @@ public class UserService {
 	// @Get all users
 	public List<UserDTO> getAllUsers() {
 		List<User> user = userRepository.findAll();
-		List<UserDTO> listofuser = new ArrayList<>();
+		List<UserDTO> listener = new ArrayList<>();
 
 		for (User userlist : user) {
 			UserDTO userdto = modelMapper.map(userlist, UserDTO.class);
-			listofuser.add(userdto);
+			listener.add(userdto);
 		}
 
-		return listofuser;
+		return listener;
 	}
 
 	// @Get user by ID
@@ -135,18 +133,4 @@ public class UserService {
 		return userPage.map(user -> modelMapper.map(user, UserDTO.class));
 	}
 
-
-//	add users to group-------------------------------------------------------------------------------------------------------
-
-//	public User addMemberToGroup(String name, Long groupId) {
-//		Group group = groupRepository.findById(groupId)
-//				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
-//
-//		User user = new User();
-//		user.setName(name);
-//		user.setGroup(group);
-//		return userRepository.save(user);
-//	}
 }
-
-

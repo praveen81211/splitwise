@@ -1,26 +1,28 @@
 package billsplitting.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import billsplitting.repository.GroupRepository;
-import billsplitting.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import billsplitting.customexception.ResourceNotFoundException;
 import billsplitting.dto.ExpenseDTO;
 import billsplitting.entities.Expense;
+import billsplitting.entities.Group;
+import billsplitting.entities.User;
 import billsplitting.repository.ExpenseRepository;
+import billsplitting.repository.GroupRepository;
 
 @Service
 public class ExpenseService {
 
 	@Autowired
 	private ExpenseRepository expenseRepository;
-
-	@Autowired
-	private UserRepository userRepository;
 
 	@Autowired
 	private GroupRepository groupRepository;
@@ -58,40 +60,32 @@ public class ExpenseService {
 		return false;
 	}
 
+	// Apply expenses to group members
+	public void applyExpenseToGroupMembers(Long groupId, BigDecimal amount) {
+		// Find the group by ID
+		Group group = groupRepository.findById(groupId)
+				.orElseThrow(() -> new ResourceNotFoundException("Group not found with ID: " + groupId));
 
-//	split bill ----------------------------------------------------------------------------------------------------------------------------------
+		// Get the list of users in the group
+		List<User> groupMembers = group.getMembers();
+		if (groupMembers == null || groupMembers.isEmpty()) {
+			throw new ResourceNotFoundException("No members found in the group.");
+		}
 
+		// Calculate the equal share for each member
+		BigDecimal share = amount.divide(BigDecimal.valueOf(groupMembers.size()), 2, RoundingMode.HALF_UP);
 
-//	public Expense splitBill(Long groupId, Long userId, String description, double amount) {
-//		Group group = groupRepository.findById(groupId)
-//				.orElseThrow(() -> new IllegalArgumentException("Group not found"));
-//
-//		User payer = userRepository.findById(userId)
-//				.orElseThrow(() -> new IllegalArgumentException("Payer not found"));
-//
-//		List<User> groupMembers = userRepository.findByGroupId(groupId);
-//		int numMembers = groupMembers.size();
-//		double individualShare = amount / numMembers;
-//
-//		Expense bill = new Expense();
-//		bill.setGroup(group);
-//		bill.setPayer(user);
-//		bill.setDescription(description);
-//		bill.setAmount(amount);
-//		billRepository.save(bill);
-//
-//		for (user member : groupMembers) {
-//			if (!member.equals(user)) {
-//				Expense shareBill = new Expense();
-//				shareBill.setGroup(group);
-//				shareBill.setPayer(payer);
-//				shareBill.setDescription(description);
-//				shareBill.setAmount(individualShare);
-//				ExpenseRepository.save(shareBill);
-//			}
-//		}
-//
-//		return bill;
-//	}
+		// Apply the expense to each member
+		for (User member : groupMembers) {
+			Expense expense = new Expense();
+			expense.setAmount(share);
+			expense.setUser(member);
+			expense.setGroup(group);
+			expense.setExpenseDate(LocalDateTime.now());
+
+			// Save the Expense entity and map it to an ExpenseDTO
+			Expense savedExpense = expenseRepository.save(expense);
+			modelMapper.map(savedExpense, ExpenseDTO.class);
+		}
+	}
 }
-

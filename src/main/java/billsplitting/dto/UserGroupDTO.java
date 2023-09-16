@@ -57,4 +57,14 @@ public class UserGroupDTO {
 		this.leftAt = leftAt;
 	}
 
+	public Long getGroupId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Long getUserId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
