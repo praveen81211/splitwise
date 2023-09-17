@@ -88,10 +88,10 @@ public class User {
 		// TODO Auto-generated method stub
 
 	}
-
-	public List<GroupDTO> getGroups() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//
+//	public List<GroupDTO> getGroups() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

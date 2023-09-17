@@ -2,6 +2,8 @@ package billsplitting.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +24,18 @@ import billsplitting.service.UserService;
 
 @RestController
 @RequestMapping("/users")
-public class UserController<ExpenseNotification> {
+public class UserController {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	private UserService userService;
 
 	@GetMapping
-	
+
 	public ResponseEntity<ApiResponse<List<UserDTO>>> Getall() {
+
+		logger.info("Getting all users");
 
 		List<UserDTO> userDTO = userService.getAllUsers();
 		return ResponseEntity.ok(new ApiResponse<>(userDTO, null));
@@ -79,11 +85,5 @@ public class UserController<ExpenseNotification> {
 		Page<UserDTO> userPage = userService.getAllUsersWithPagination(page, size, sortBy);
 		return ResponseEntity.ok(new ApiResponse<>(userPage, null));
 	}
-//       add user to group -----------------------------------------------------------------------------------------------
-//	@PostMapping
-//	public User addMemberToGroup(@RequestBody UserRequest memberRequest) {
-//		return userService.addMemberToGroup(memberRequest.getName(), memberRequest.getGroupId());
-//	}
+
 }
-
-

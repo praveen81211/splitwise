@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,6 +29,9 @@ import jakarta.validation.Valid;
 @Service
 public class UserService {
 
+
+	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -41,11 +46,12 @@ public class UserService {
 
 	// @Get all users
 	public List<UserDTO> getAllUsers() {
+		logger.info("Getting all users");
 		List<User> user = userRepository.findAll();
 		List<UserDTO> listener = new ArrayList<>();
 
-		for (User userlist : user) {
-			UserDTO userdto = modelMapper.map(userlist, UserDTO.class);
+		for (User userslist : user) {
+			UserDTO userdto = modelMapper.map(userslist, UserDTO.class);
 			listener.add(userdto);
 		}
 

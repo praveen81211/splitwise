@@ -44,15 +44,15 @@ public class UserDTO {
 	@JsonProperty("deleted") // Specify the JSON property name
 	private boolean deleted;
 
-	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public String getEmail() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	public CharSequence getPassword() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	// Add getter and setter methods for all fields
+
 }
