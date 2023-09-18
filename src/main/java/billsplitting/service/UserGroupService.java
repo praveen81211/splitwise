@@ -63,10 +63,8 @@ public class UserGroupService {
 	}
 
 	// Add a user to a group
-	public UserGroupDTO addUserToGroup(UserGroupDTO userGroupDTO) {
-		Long groupId = userGroupDTO.getGroupId();
-		Long userId = userGroupDTO.getUserId();
 
+	public UserGroupDTO addUserToGroup(Long groupId, Long userId) {
 		// Check if the group and user exist
 		Group group = groupRepository.findById(groupId)
 				.orElseThrow(() -> new ResourceNotFoundException("Group not found with ID: " + groupId));
@@ -85,6 +83,6 @@ public class UserGroupService {
 
 		// Convert UserGroup entity to UserGroupDTO using modelmapper
 		return modelMapper.map(userGroup, UserGroupDTO.class);
-	}
+	 }
 
 }

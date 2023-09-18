@@ -2,17 +2,11 @@ package billsplitting.controller;
 
 import java.util.List;
 
+import billsplitting.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import billsplitting.dto.GroupDTO;
@@ -42,13 +36,24 @@ public class GroupController {
 	}
 
 	// Create a new group -----------------------------------------------------------------------------------------
-	@PostMapping("/createnewgroup")
-	public ResponseEntity<ApiResponse<GroupDTO>> newgroup(@RequestBody GroupDTO groupDTO) {
+	@PostMapping("/create a new group")
+	public ResponseEntity<GroupDTO> createGroup(
+			@RequestParam("groupName") String groupName,
+			@RequestParam ("createdByUser") Long createdByUser ){ // Match the parameter name with the DTO
 
-		GroupDTO createdGroup = groupService.createGroup(groupDTO.getGroupName());
+		// Check if groupName is not empty
+		if (groupName == null || groupName.trim().isEmpty()) {
+			return ResponseEntity.badRequest().body(null) ;
+		}
+		GroupDTO groupDTO = new GroupDTO();
+		groupDTO.setGroupName(groupName);
+		groupDTO.setCreatedByUser(createdByUser); // Match the setter with the DTO
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponse<>(createdGroup, null));
+		GroupDTO responseDTO = groupService.createGroup(groupDTO);
+		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 	}
+
+
 
 //	 @ Update an existing group by ID  
 	@PutMapping("/update/{id}")

@@ -1,69 +1,39 @@
 package billsplitting.dto;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
-import billsplitting.entities.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class GroupDTO {
 
 	private Long groupId;
-
 	private String groupName;
 
-	private User createdByUser;
-
+	private Long createdByUser;
 	private LocalDateTime createdAt;
-
 	private LocalDateTime updatedAt;
-
 	private boolean isDeleted;
 
-	public Long getGroupId() {
-		return groupId;
+	// Regular expression pattern for a valid group name
+	private static final String GROUP_NAME_PATTERN = "^[A-Za-z0-9_\\s-]+$";
+
+	public boolean isValidGroupName() {
+		// Check if the groupName matches the pattern
+		return groupName != null && Pattern.matches(GROUP_NAME_PATTERN, groupName);
 	}
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getGroupName() {
-		return groupName;
+	public void setCreatedByUser(Long createdByUser) {
+		this.createdByUser = createdByUser;
 	}
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
-
-	public User getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(User createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 }

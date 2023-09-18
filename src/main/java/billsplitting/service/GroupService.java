@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import billsplitting.entities.User;
+import billsplitting.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,10 +25,13 @@ public class GroupService {
 	private GroupRepository groupRepository;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private ModelMapper modelmapper;
 
-//	@Autowired
-//	private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	// @Get all groups
 	public List<GroupDTO> getAllGroups() {
@@ -56,17 +61,23 @@ public class GroupService {
 	}
 
 	// Create a new group
-	public GroupDTO createGroup(String groupName) {
-		Group newGroup = new Group();
-		newGroup.setGroupName(groupName);
+	public GroupDTO createGroup(GroupDTO groupDTO) {
+		// Get the user by ID from the userRepository
+		User creator = userRepository.findById(groupDTO.getCreatedByUser())
+				.orElseThrow(() -> new IllegalArgumentException("Invalid creator ID"));
 
-		// You can set other properties of the group if needed
+		// Create a new group entity and set its createdByUser
+		Group group = modelmapper.map(groupDTO, Group.class);
+		group.setCreatedByUser(creator);
 
-		Group createdGroup = groupRepository.save(newGroup);
-		GroupDTO createdGroupDTO = modelmapper.map(createdGroup, GroupDTO.class);
 
-		return createdGroupDTO;
+		// Additional logic, such as generating a unique group ID, if needed
 
+		// Save the group to the groupRepository
+		Group savedGroup = groupRepository.save(group);
+
+		// Map the saved group back to a DTO and return it
+		return modelmapper.map(savedGroup, GroupDTO.class);
 	}
 
 	// @Update an existing group

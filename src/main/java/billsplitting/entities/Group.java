@@ -57,19 +57,18 @@ public class Group {
 	@JsonIgnore
 	private List<UserGroup> userGroups = new ArrayList<>();
 
-	public void setGroupName(String groupName2) {
-		// TODO Auto-generated method stub
 
-	}
 
 	public List<User> getMembers() {
 		// TODO Auto-generated method stub
-		return null;
+		return getMembers();
 	}
 
 	public List<UserGroup> getUsers() {
 		// TODO Auto-generated method stub
-		return null;
+		return userGroups;
 	}
+
+
 
 }

@@ -43,19 +43,6 @@ public class UserGroup {
 	@Column(name = "left_at")
 	private LocalDateTime leftAt;
 
-	public void setGroup(Group group2) {
-		// TODO Auto-generated method stub
 
-	}
-
-	public void setUser(User user2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setJoinedAt(LocalDateTime now) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
