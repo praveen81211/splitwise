@@ -60,9 +60,13 @@ public class Group {
 
 
 	public List<User> getMembers() {
-		// TODO Auto-generated method stub
-		return getMembers();
+		List<User> members = new ArrayList<>();
+		for (UserGroup userGroup : userGroups) {
+			members.add(userGroup.getUser());
+		}
+		return members;
 	}
+
 
 	public List<UserGroup> getUsers() {
 		// TODO Auto-generated method stub
