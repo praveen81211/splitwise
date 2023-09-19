@@ -1,5 +1,6 @@
 package billsplitting.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import billsplitting.entities.Group;
@@ -8,7 +9,7 @@ import billsplitting.entities.User;
 public class ExpenseDTO {
 
 	private Long expenseId;
-	private Double amount;
+	private BigDecimal amount;
 	private String description;
 	private User payerUser;
 	private Group group;
@@ -24,11 +25,11 @@ public class ExpenseDTO {
 		this.expenseId = expenseId;
 	}
 
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

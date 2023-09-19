@@ -34,7 +34,7 @@ public class Expense {
 	private Long expenseId;
 
 	@Column(name = "amount", nullable = false)
-	private Double amount;
+	private BigDecimal amount;
 
 	@Column(name = "description")
 	private String description;
