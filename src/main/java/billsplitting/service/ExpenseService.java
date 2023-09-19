@@ -82,7 +82,7 @@ public ExpenseDTO applyExpenseToGroupMembers(Long groupId, BigDecimal amount, St
 	// Apply expenses to group members
 //	public void applyExpenseToGroupMembers(Long groupId, BigDecimal amount) {
 //		// Find the group by ID
-//		Group group = groupRepository.findById(groupId)
+//		Group = groupRepository.findById(groupId)
 //				.orElseThrow(() -> new ResourceNotFoundException("Group not found with ID: " + groupId));
 //
 //		// Get the list of users in the group
