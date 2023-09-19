@@ -80,12 +80,22 @@ public class ExpenseController {
 		}
 	}
 
+
 	// Endpoint to apply expenses to group members
-	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}")
-	public ResponseEntity<String> applyExpenseToGroupMembers(@PathVariable Long groupId,
-			@PathVariable BigDecimal amount) {
-		expenseService.applyExpenseToGroupMembers(groupId, amount);
+	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}/{description}")
+	public ResponseEntity<String> applyExpenseToGroupMembers(
+			@PathVariable Long groupId,
+			@PathVariable BigDecimal amount,
+			@PathVariable String description) {
+		expenseService.applyExpenseToGroupMembers(groupId, amount, description);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
 	}
+	// Endpoint to apply expenses to group members
+//	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}")
+//	public ResponseEntity<String> applyExpenseToGroupMembers(@PathVariable Long groupId,
+//			@PathVariable BigDecimal amount) {
+//		expenseService.applyExpenseToGroupMembers(groupId, amount);
+//		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
+//	}
 
 }
