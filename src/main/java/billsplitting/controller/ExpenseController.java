@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import billsplitting.customexception.ResourceNotFoundException;
+import billsplitting.entities.ExpenseParticipant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,11 +93,23 @@ public class ExpenseController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
 	}
 	// Endpoint to apply expenses to group members
-//	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}")
-//	public ResponseEntity<String> applyExpenseToGroupMembers(@PathVariable Long groupId,
-//			@PathVariable BigDecimal amount) {
-//		expenseService.applyExpenseToGroupMembers(groupId, amount);
-//		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
-//	}
+	@PostMapping("/splitEqually/{expenseId}")
+	public ResponseEntity<List<ExpenseParticipant>> splitExpenseEquallyAmongGroupMembers(@PathVariable Long expenseId) {
+		try {
+			List<ExpenseParticipant> expenseParticipants = expenseService.splitExpenseEquallyAmongGroupMembers(expenseId);
+			return ResponseEntity.status(HttpStatus.CREATED).body(expenseParticipants);
+		} catch (ResourceNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+	}
 
-}
+
+
+
+
+
+
+

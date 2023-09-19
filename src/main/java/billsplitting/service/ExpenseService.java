@@ -2,11 +2,13 @@ package billsplitting.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 //import jakarta.transaction.Transactional;
+import billsplitting.entities.ExpenseParticipant;
+import billsplitting.repository.ExpenseParticipantRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class ExpenseService {
 
 	@Autowired
 	private GroupRepository groupRepository;
+
+	@Autowired
+	private ExpenseParticipantRepository expenseParticipantRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -79,32 +84,46 @@ public ExpenseDTO applyExpenseToGroupMembers(Long groupId, BigDecimal amount, St
 	return modelMapper.map(expenses,ExpenseDTO.class);
 }
 
-	// Apply expenses to group members
-//	public void applyExpenseToGroupMembers(Long groupId, BigDecimal amount) {
-//		// Find the group by ID
-//		Group = groupRepository.findById(groupId)
-//				.orElseThrow(() -> new ResourceNotFoundException("Group not found with ID: " + groupId));
-//
-//		// Get the list of users in the group
-//		List<User> groupMembers = group.getMembers();
-//		if (groupMembers == null || groupMembers.isEmpty()) {
-//			throw new ResourceNotFoundException("No members found in the group.");
-//		}
-//
-//		// Calculate the equal share for each member
-//		BigDecimal share = amount.divide(BigDecimal.valueOf(groupMembers.size()), 2, RoundingMode.HALF_UP);
-//
-//		// Apply the expense to each member
-//		for (User member : groupMembers) {
-//			Expense expense = new Expense();
-//			expense.setAmount(share);
-//			expense.setUser(member);
-//			expense.setGroup(group);
-//			expense.setExpenseDate(LocalDateTime.now());
-//
-//			// Save the Expense entity and map it to an ExpenseDTO
-//			Expense savedExpense = expenseRepository.save(expense);
-//			modelMapper.map(savedExpense, ExpenseDTO.class);
-//		}
-//	}
+//	 Apply expenses to group members
+public List<ExpenseParticipant> splitExpenseEquallyAmongGroupMembers(Long expenseId) {
+	Optional<Expense> expenseOptional = expenseRepository.findById(expenseId);
+
+	if (expenseOptional.isPresent()) {
+		Expense expense = expenseOptional.get();
+
+		// Find the group associated with the expense
+		Group group = expense.getGroup();
+
+		// Get the list of users in the group
+		List<User> groupMembers = group.getMembers();
+
+		if (groupMembers == null || groupMembers.isEmpty()) {
+			throw new ResourceNotFoundException("No members found in the group.");
+		}
+
+		// Calculate the equal share for each member
+		BigDecimal share = expense.getAmount().divide(BigDecimal.valueOf(groupMembers.size()), 2, RoundingMode.HALF_UP);
+
+		// Create a list to store ExpenseParticipant entities
+		List<ExpenseParticipant> expenseParticipants = new ArrayList<>();
+
+		// Apply the expense to each member and add them to the list
+		for (User member : groupMembers) {
+			// Create a new ExpenseParticipant entity
+			ExpenseParticipant expenseParticipant = new ExpenseParticipant();
+			expenseParticipant.setExpense(expense);
+			expenseParticipant.setUserparticipant(member);
+			expenseParticipant.setShareAmount(share);
+
+			// Save the ExpenseParticipant entity and add it to the list
+			expenseParticipantRepository.save(expenseParticipant);
+			expenseParticipants.add(expenseParticipant);
+		}
+
+		return expenseParticipants; // Return the list of ExpenseParticipant entities
+	} else {
+		throw new ResourceNotFoundException("Expense not found with ID: " + expenseId);
+	}
 }
+}
+
