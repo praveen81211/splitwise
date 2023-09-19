@@ -25,26 +25,5 @@ public class UserGroupDTO {
 
 
 
-	public Long getGroupId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Long getUserId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public void setJoinedAt(LocalDateTime joinedAt) {
-		this.joinedAt = joinedAt;
-	}
 
 }

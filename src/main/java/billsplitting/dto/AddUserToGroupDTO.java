@@ -20,5 +20,5 @@ public class AddUserToGroupDTO {
 		this.userId = userId;
 	}
 
-	// Getters and setters
+
 }

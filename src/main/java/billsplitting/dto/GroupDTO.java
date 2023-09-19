@@ -29,11 +29,5 @@ public class GroupDTO {
 		return groupName != null && Pattern.matches(GROUP_NAME_PATTERN, groupName);
 	}
 
-	public void setCreatedByUser(Long createdByUser) {
-		this.createdByUser = createdByUser;
-	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
 }

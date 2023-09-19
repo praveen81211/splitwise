@@ -3,7 +3,13 @@ package billsplitting.dto;
 import java.time.LocalDateTime;
 
 import billsplitting.entities.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SettlementDTO {
 
 	private Long settlementId;
@@ -18,52 +24,6 @@ public class SettlementDTO {
 
 	private boolean isDeleted;
 
-	public Long getSettlementId() {
-		return settlementId;
-	}
 
-	public void setSettlementId(Long settlementId) {
-		this.settlementId = settlementId;
-	}
-
-	public User getPayerUser() {
-		return payerUser;
-	}
-
-	public void setPayerUser(User payerUser) {
-		this.payerUser = payerUser;
-	}
-
-	public User getReceiverUser() {
-		return receiverUser;
-	}
-
-	public void setReceiverUser(User receiverUser) {
-		this.receiverUser = receiverUser;
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
 
 }
