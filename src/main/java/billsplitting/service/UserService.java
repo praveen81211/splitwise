@@ -30,13 +30,12 @@ import jakarta.validation.Valid;
 public class UserService {
 
 
-	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
 
 	@Autowired
 	private UserRepository userRepository;
 
-//	@Autowired
-//	private GroupRepository groupRepository;
+
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -46,7 +45,7 @@ public class UserService {
 
 	// @Get all users
 	public List<UserDTO> getAllUsers() {
-		logger.info("Getting all users");
+
 		List<User> user = userRepository.findAll();
 		List<UserDTO> listener = new ArrayList<>();
 

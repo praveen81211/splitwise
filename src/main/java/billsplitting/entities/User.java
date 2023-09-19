@@ -84,14 +84,10 @@ public class User {
 	@JsonIgnore
 	private List<ExpenseParticipant> expenseParticipants = new ArrayList<>();
 
-	public void setPassword(String encode) {
-		// TODO Auto-generated method stub
-
-	}
-//
-//	public List<GroupDTO> getGroups() {
+//	public void setPassword(String encode) {
 //		// TODO Auto-generated method stub
-//		return null;
+//
 //	}
+
 
 }
