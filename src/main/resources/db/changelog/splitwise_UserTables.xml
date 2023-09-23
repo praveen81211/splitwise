@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-user-table" author="praveen">
+        <createTable tableName="User">
+            <column name="user_id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints/>
+            </column>
+            <column name="is_active" type="BOOLEAN"/>
+            <column name="is_deleted" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Set default values using SQL -->
+    <changeSet id="set-default-values" author="praveen">
+        <sql>
+            <!-- Set default value for created_at -->
+            ALTER TABLE "User" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;
+            <!-- Set default value for is_active -->
+            ALTER TABLE "User" ALTER COLUMN "is_active" SET DEFAULT true;
+            <!-- Set default value for is_deleted -->
+            ALTER TABLE "User" ALTER COLUMN "is_deleted" SET DEFAULT false;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

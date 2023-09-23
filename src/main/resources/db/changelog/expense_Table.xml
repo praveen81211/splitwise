@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+
+    <changeSet id="create_Table_expense" author="praveen">
+        <createTable tableName="Expense">
+            <column name="expense_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="amount" type="FLOAT">
+                <constraints unique="false" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payer_user_id" type="INT">
+                <constraints/>
+            </column>
+            <column name="group_id" type="INT">
+                <constraints/>
+            </column>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP"/>
+            <column name="is_deleted" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="addForeignKeyConstraints-expense" author="praveen">
+        <addForeignKeyConstraint baseTableName="Expense"
+                                 baseColumnNames="payer_user_id"
+                                 constraintName="fk_expense_user"
+                                 referencedTableName="User"
+                                 referencedColumnNames="user_id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="Expense"
+                                 baseColumnNames="group_id"
+                                 constraintName="fk_expense_group"
+                                 referencedTableName="Group"
+                                 referencedColumnNames="group_id"
+                                 onDelete="CASCADE"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

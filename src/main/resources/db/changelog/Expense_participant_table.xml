@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+<changeSet id="createTable-expenseParticipant" author="praveen">
+    <createTable tableName="ExpenseParticipant">
+        <column name="Expense_participant_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+            <constraints primaryKey="true" nullable="false"/>
+        </column>
+        <column name="expense_id" type="INT">
+            <constraints unique="true" nullable="false"/>
+        </column>
+        <column name="user_id" type="INT">
+            <constraints nullable="false"/>
+        </column>
+        <column name="share_amount" type="FLOAT">
+            <constraints nullable="false"/>
+        </column>
+
+    </createTable>
+</changeSet>
+
+
+<changeSet id="addForeignKeyConstraints-expenseParticipant" author="praveen">
+<addForeignKeyConstraint baseTableName="ExpenseParticipant"
+                         baseColumnNames="expense_id"
+                         constraintName="fk_expense_participant_expense"
+                         referencedTableName="Expense"
+                         referencedColumnNames="expense_id"
+                         onDelete="CASCADE"/>
+<addForeignKeyConstraint baseTableName="ExpenseParticipant"
+                         baseColumnNames="user_id"
+                         constraintName="fk_expense_participant_user"
+                         referencedTableName="User"
+                         referencedColumnNames="user_id"
+                         onDelete="CASCADE"/>
+</changeSet>
+
+</databaseChangeLog>

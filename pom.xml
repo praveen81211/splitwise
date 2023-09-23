@@ -28,9 +28,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope><!-- Replace with your PostgreSQL version -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
