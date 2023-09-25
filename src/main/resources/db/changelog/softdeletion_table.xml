@@ -6,7 +6,7 @@
 
     <changeSet id="createTable-softdeletion" author="praveen">
         <createTable tableName="SoftDeletion">
-            <column name="deletion_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="deletion_id" type="INT" autoIncrement="true" startWith="600" incrementBy="1">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="table_name" type="INT">
@@ -30,7 +30,7 @@
         <addForeignKeyConstraint baseTableName="SoftDeletion"
                                  baseColumnNames="deleted_by_user_id"
                                  constraintName="fk_expense_Softdeletion_user"
-                                 referencedTableName="User"
+                                 referencedTableName="users"
                                  referencedColumnNames="user_id"
                                  onDelete="CASCADE"/>
 

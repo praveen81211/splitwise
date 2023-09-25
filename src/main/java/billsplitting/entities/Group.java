@@ -22,7 +22,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "[Group]")
+@Table(name = "\"group\"")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

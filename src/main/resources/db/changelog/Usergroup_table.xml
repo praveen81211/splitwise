@@ -7,7 +7,7 @@
 
     <changeSet id="createTable-usergroup" author="praveen">
         <createTable tableName="UserGroup">
-            <column name="user_group_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="user_group_id" type="INT" autoIncrement="true" startWith="200" incrementBy="1">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_id" type="INT">
@@ -16,7 +16,7 @@
             <column name="group_id" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name=" joined_at" type="TIMESTAMP">
+            <column name="joined_at" type="TIMESTAMP">
                 <constraints/>
             </column>
             <column name="left_at" type="TIMESTAMP">
@@ -26,11 +26,11 @@
     </changeSet>
 
 
-    <changeSet id="addForeignKeyConstraints-user_roles" author="ganesh">
+    <changeSet id="addForeignKeyConstraints-user_roles" author="praveen">
         <addForeignKeyConstraint baseTableName="UserGroup"
                                  baseColumnNames="user_id"
                                  constraintName="fk_user_group_user"
-                                 referencedTableName="User"
+                                 referencedTableName="users"
                                  referencedColumnNames="user_id"
                                  onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="UserGroup"

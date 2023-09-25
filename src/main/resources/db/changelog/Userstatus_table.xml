@@ -6,7 +6,7 @@
 
     <changeSet id="createTable-Userstatus" author="praveen">
         <createTable tableName="UserStatus">
-            <column name="status_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="status_id" type="INT" autoIncrement="true" startWith="700" incrementBy="1">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_id" type="INT">
@@ -25,7 +25,7 @@
         <addForeignKeyConstraint baseTableName="UserStatus"
                                  baseColumnNames="user_id"
                                  constraintName="fk_expense_userstatus_user"
-                                 referencedTableName="User"
+                                 referencedTableName="users"
                                  referencedColumnNames="user_id"
                                  onDelete="CASCADE"/>
 

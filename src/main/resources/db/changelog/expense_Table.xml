@@ -7,7 +7,7 @@
 
     <changeSet id="create_Table_expense" author="praveen">
         <createTable tableName="Expense">
-            <column name="expense_id" type="INT" autoIncrement="true" startWith="1" incrementBy="1">
+            <column name="expense_id" type="INT" autoIncrement="true" startWith="300" incrementBy="1">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="amount" type="FLOAT">
@@ -33,7 +33,7 @@
         <addForeignKeyConstraint baseTableName="Expense"
                                  baseColumnNames="payer_user_id"
                                  constraintName="fk_expense_user"
-                                 referencedTableName="User"
+                                 referencedTableName="users"
                                  referencedColumnNames="user_id"
                                  onDelete="CASCADE"/>
         <addForeignKeyConstraint baseTableName="Expense"
