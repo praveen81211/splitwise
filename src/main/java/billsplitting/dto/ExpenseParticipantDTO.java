@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ExpenseParticipantDTO {
 
-	private Long expenseParticipantId;
+	private Long ExpenseParticipantId;
 
 	private Expense expense;
 

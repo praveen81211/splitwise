@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 public class ExpenseParticipant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "expense_participant_id")
+	@Column(name = "Expense_participant_id")
 	private Long expenseParticipantId;
 
 	@ManyToOne

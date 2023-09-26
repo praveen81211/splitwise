@@ -16,7 +16,7 @@
             <column name="group_id" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="joined_at" type="TIMESTAMP">
+            <column name=" joined_at" type="TIMESTAMP">
                 <constraints/>
             </column>
             <column name="left_at" type="TIMESTAMP">
@@ -41,6 +41,10 @@
                                  onDelete="CASCADE"/>
 
    </changeSet>
+
+    <changeSet id="updateconstraintuserid" author="praveen">
+        <dropUniqueConstraint tableName="usergroup" constraintName="UserGroup_user_id_key" />
+    </changeSet>
 
 
 </databaseChangeLog>

@@ -38,4 +38,8 @@
                          onDelete="CASCADE"/>
 </changeSet>
 
+    <changeSet id="updateconstraintexpenseid" author="praveen">
+        <dropUniqueConstraint tableName="expenseparticipant" constraintName="ExpenseParticipant_expense_id_key" />
+    </changeSet>
+
 </databaseChangeLog>
