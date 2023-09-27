@@ -3,6 +3,7 @@ package billsplitting.controller;
 import java.util.List;
 import java.util.Optional;
 
+import billsplitting.customexception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,12 +76,24 @@ public class UserGroupController {
 
 	// Endpoint to add a user to a group
 	@PostMapping("/addUserToGroup")
-	public ResponseEntity<UserGroupDTO> addUserToGroup(
+	public ResponseEntity<?> addUserToGroup(
 			@RequestParam("groupId") Long groupId,
 			@RequestParam("userId") Long userId) {
 
-		UserGroupDTO addedUserGroup = userGroupService.addUserToGroup(groupId, userId);
-		return ResponseEntity.status(HttpStatus.CREATED).body(addedUserGroup);
+		try {
+			UserGroupDTO userGroupDTO = userGroupService.addUserToGroup(groupId, userId);
+			return ResponseEntity.ok(userGroupDTO);
+		} catch (IllegalArgumentException e) {
+			// Handle the case where the user is already a member of the group
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body("User is already a member of this group.");
+		} catch (ResourceNotFoundException e) {
+			// Handle the case where the group or user is not found
+			return ResponseEntity
+					.status(HttpStatus.NOT_FOUND)
+					.body(e.getMessage());
+		}
 	}
 }
 

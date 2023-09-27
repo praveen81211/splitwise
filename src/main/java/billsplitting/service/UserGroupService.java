@@ -72,6 +72,12 @@ public class UserGroupService {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
+
+		// Check if the user is already a member of the group
+		if (userGroupRepository.existsByGroupAndUser(group, user)) {
+			throw new IllegalArgumentException("User is already a member of this group.");
+		}
+
 		// Create a UserGroup entity and set the group, user, and joinedAt timestamp
 		UserGroup userGroup = new UserGroup();
 		userGroup.setGroup(group);
