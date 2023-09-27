@@ -44,6 +44,9 @@ public class UserDTO {
 	@JsonProperty("deleted") // Specify the JSON property name
 	private boolean deleted;
 
+	@JsonProperty("roles")
+	private String roles;
+
 
 
 

@@ -52,6 +52,8 @@ public class User {
 	@Column(name = "is_deleted")
 	private boolean isDeleted;
 
+	private String roles;
+
 	@OneToMany(mappedBy = "createdByUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Group> createdGroups = new ArrayList<>();
