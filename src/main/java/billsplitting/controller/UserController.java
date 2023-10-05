@@ -45,7 +45,6 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping
-
 	public ResponseEntity<ApiResponse<List<UserDTO>>> Getall() {
 
 		logger.info("Getting all users");
@@ -63,11 +62,11 @@ public class UserController {
 		return ResponseEntity.ok(new ApiResponse<>(userDto, null));
 	}
 
-	@PostMapping("/create")
-	public ResponseEntity<ApiResponse<UserDTO>> newUser(@RequestBody UserDTO postRequest) {
-		UserDTO userdto = userService.createusers(postRequest);
-		return ResponseEntity.ok(new ApiResponse<>(userdto, null));
-	}
+//	@PostMapping("/create")
+//	public ResponseEntity<ApiResponse<UserDTO>> newUser(@RequestBody UserDTO postRequest) {
+//		UserDTO userdto = userService.createusers(postRequest);
+//		return ResponseEntity.ok(new ApiResponse<>(userdto, null));
+//	}
 
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -81,14 +80,14 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	@PreAuthorize("hasAuthority('ROLE_USER')")
+	@PreAuthorize("hasAuthority('ROLE_USER')||hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<ApiResponse<UserDTO>> updateuser(@PathVariable Long id, @RequestBody UserDTO updateduser) {
 		UserDTO dto = userService.updateduser(id, updateduser);
 		return ResponseEntity.ok(new ApiResponse<>(dto, null));
 	}
 
 	@PostMapping("/register")
-//	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public ResponseEntity<ApiResponse<UserDTO>> registerUser(@RequestBody UserDTO registrationRequest) {
 		UserDTO userdto = userService.registerUser(registrationRequest);
 		return ResponseEntity.ok(new ApiResponse<>(userdto, null));

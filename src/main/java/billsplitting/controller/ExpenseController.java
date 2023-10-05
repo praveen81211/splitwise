@@ -85,12 +85,12 @@ public class ExpenseController {
 
 	// Endpoint to apply expenses to group members
 	@PostMapping("/applyExpenseToGroup/{groupId}/{amount}/{description}")
-	public ResponseEntity<String> applyExpenseToGroupMembers(
+	public ResponseEntity<?> applyExpenseToGroupMembers(
 			@PathVariable Long groupId,
 			@PathVariable BigDecimal amount,
 			@PathVariable String description) {
-		expenseService.applyExpenseToGroupMembers(groupId, amount, description);
-		return ResponseEntity.status(HttpStatus.CREATED).body("Expense applied to group members successfully.");
+		ExpenseDTO expenseId= expenseService.applyExpenseToGroupMembers(groupId, amount, description);
+		return ResponseEntity.status(HttpStatus.CREATED).body(expenseId);
 	}
 	// Endpoint to apply expenses to group members
 	@PostMapping("/splitEqually/{expenseId}")

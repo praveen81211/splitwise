@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.Share_Sense</groupId>
-	<artifactId>bill_splitting</artifactId>
+	<artifactId>bildl_splitting</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bill_splitting</name>
 	<description>Demo project for Spring Boot</description>
@@ -107,6 +107,31 @@
 			<version>4.20.0</version> <!-- Use the version appropriate for your
 			project -->
 		</dependency>
+
+
+			<!-- JUnit 5 -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.7.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.7.0</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>3.12.4</version>
+				<scope>test</scope>
+			</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
