@@ -87,6 +87,4 @@ public class User {
 	private List<ExpenseParticipant> expenseParticipants = new ArrayList<>();
 
 
-
-
 }

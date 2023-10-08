@@ -6,8 +6,6 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +22,6 @@ import billsplitting.dto.UserDTO;
 import billsplitting.entities.User;
 //import billsplitting.repository.GroupRepository;
 import billsplitting.repository.UserRepository;
-import jakarta.validation.Valid;
 
 @Service
 public class UserService {
@@ -103,7 +100,7 @@ public class UserService {
 
 //	registration of user into splitwiseapplication
 
-	public UserDTO registerUser(@Valid UserDTO registrationRequest) {
+	public UserDTO registerUser(User registrationRequest) {
 		// Check if the email is already registered
 		if (userRepository.findByEmail(registrationRequest.getEmail()).isPresent()) {
 			throw new RegistrationException("Email is already registered");

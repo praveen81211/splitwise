@@ -2,6 +2,8 @@ package com.Share_Sense.bill_splitting;
 
 import billsplitting.controller.UserController;
 import billsplitting.dto.UserDTO;
+import billsplitting.entities.User;
+import billsplitting.repository.UserRepository;
 import billsplitting.responsedto.ApiResponse;
 import billsplitting.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,13 +11,22 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 public class UserControllerTest {
     @Mock
@@ -23,6 +34,11 @@ public class UserControllerTest {
 
     @InjectMocks
     private UserController userController;
+
+    @Mock
+    private UserRepository userRepository;
+
+
 
     @BeforeEach
     void setup(){
@@ -41,4 +57,9 @@ public class UserControllerTest {
         assert response.getBody() != null;
         assert response.getBody().getData() == users;
     }
+
+
+
+
+
 }

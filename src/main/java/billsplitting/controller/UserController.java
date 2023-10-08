@@ -4,6 +4,7 @@ import java.util.List;
 
 import billsplitting.config.AuthRequest;
 import billsplitting.config.JwtService;
+import billsplitting.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class UserController {
 
 	@PostMapping("/register")
 //	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public ResponseEntity<ApiResponse<UserDTO>> registerUser(@RequestBody UserDTO registrationRequest) {
+	public ResponseEntity<ApiResponse<UserDTO>> registerUser(@RequestBody User registrationRequest) {
 		UserDTO userdto = userService.registerUser(registrationRequest);
 		return ResponseEntity.ok(new ApiResponse<>(userdto, null));
 	}
